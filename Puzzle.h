@@ -12,7 +12,7 @@ class Puzzle{
     
 public:
     Puzzle();
-    Puzzle(const vector<T> &vec);
+    Puzzle(const Puzzle<T> &);
     ~Puzzle();
     
 private:
