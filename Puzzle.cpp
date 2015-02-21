@@ -9,7 +9,7 @@
 #include <vector>
 #include <iterator>
 #include "Puzzle.h"
-
+using namespace std;
 template<Typename T>
 Puzzle<T>::Puzzle()
 {
