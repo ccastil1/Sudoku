@@ -10,14 +10,15 @@
 #include <iterator>
 #include "Puzzle.h"
 using namespace std;
-template<Typename T>
-Puzzle<T>::Puzzle()
+
+//template<Typename T>
+Puzzle<int>::Puzzle()
 {
     ptr = new T[9];
     vector < vector<int> > vec(9, vector<int>(9));
 }
 
-template<Typename T>
+//template<Typename T>
 Puzzle<int>::Puzzle(const Puzzle<int> &vec)
 {
     ptr = new int[9];
@@ -27,7 +28,7 @@ Puzzle<int>::Puzzle(const Puzzle<int> &vec)
     }
 }
 
-template<Typename T>
+//template<Typename T>
 Puzzle<int>::~Puzzle()
 {
     delete [] ptr;
