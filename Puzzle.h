@@ -6,7 +6,7 @@
 
 #ifndef _Puzzle_h
 #define _Puzzle_h
-using namespace std:
+using namespace std;
 
 template <typename T>
 class Puzzle{
@@ -17,8 +17,8 @@ public:
     ~Puzzle();
     
 private:
-    Puzzle<int> rows;
-    Puzzle<int> columns;
+    vector<int> rows;
+    vector<int> columns;
 };
 
 
