@@ -16,8 +16,8 @@ public:
     ~Puzzle();
     
 private:
-    vector<T> rows;
-    vector<T> columns;
+    Puzzle<T> rows;
+    Puzzle<T> columns;
 };
 
 
