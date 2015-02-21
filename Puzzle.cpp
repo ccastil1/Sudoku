@@ -14,7 +14,7 @@ using namespace std;
 //template<Typename T>
 Puzzle<int>::Puzzle()
 {
-    ptr = new T[9];
+    ptr = new int[9];
     vector < vector<int> > vec(9, vector<int>(9));
 }
 
