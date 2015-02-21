@@ -10,16 +10,16 @@
 
 using namespace std;
 
-//template <typename T>
+template <typename T>
 class Puzzle{
     
 public:
     Puzzle();
-    vector(const vector<int> &);
+    Puzzle(const vector<T> &);
     ~Puzzle();
     
 private:
-    vector < vector<int> > vec(9, vector<int>(9));
+    vector < vector<T> > vec[9];
 };
 
 
