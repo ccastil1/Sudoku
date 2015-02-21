@@ -8,7 +8,7 @@
 #define _Puzzle_h
 using namespace std;
 
-template <typename T>
+//template <typename T>
 class Puzzle{
     
 public:
