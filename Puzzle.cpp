@@ -11,25 +11,25 @@
 #include "Puzzle.h"
 using namespace std;
 
-//template<Typename T>
-Puzzle<int>::Puzzle()
+template<Typename T>
+Puzzle<T>::Puzzle()
 {
-    ptr = new int[9];
-    vector < vector<int> > vec(9, vector<int>(9));
+    ptr = new T[9];
+    vector < vector<T> > vec(9, vector<T>(9));
 }
 
-//template<Typename T>
-Puzzle<int>::Puzzle(const Puzzle<int> &vec)
+template<Typename T>
+Puzzle<T>::Puzzle(const Puzzle<T> &vec)
 {
-    ptr = new int[9];
+    ptr = new T[9];
     for(int i =0; i < 9; i++)
     {
         ptr[i] = vec.ptr;
     }
 }
 
-//template<Typename T>
-Puzzle<int>::~Puzzle()
+template<Typename T>
+Puzzle<T>::~Puzzle()
 {
     delete [] ptr;
 }
