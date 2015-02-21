@@ -12,12 +12,12 @@ class Puzzle{
     
 public:
     Puzzle();
-    Puzzle(const Puzzle<T> &);
+    Puzzle(const Puzzle<int> &);
     ~Puzzle();
     
 private:
-    Puzzle<T> rows;
-    Puzzle<T> columns;
+    Puzzle<int> rows;
+    Puzzle<int> columns;
 };
 
 
