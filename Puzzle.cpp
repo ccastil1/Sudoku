@@ -14,13 +14,13 @@ template<Typename T>
 Puzzle<T>::Puzzle()
 {
     ptr = new T[9];
-    vector < vector<T> > vec(9, vector<T>(9));
+    vector < vector<int> > vec(9, vector<int>(9));
 }
 
 template<Typename T>
-Puzzle<T>::Puzzle(const Puzzle<T> &vec)
+Puzzle<int>::Puzzle(const Puzzle<int> &vec)
 {
-    ptr = new T[9];
+    ptr = new int[9];
     for(int i =0; i < 9; i++)
     {
         ptr[i] = vec.ptr;
@@ -28,7 +28,7 @@ Puzzle<T>::Puzzle(const Puzzle<T> &vec)
 }
 
 template<Typename T>
-Puzzle<T>::~Puzzle()
+Puzzle<int>::~Puzzle()
 {
     delete [] ptr;
 }
