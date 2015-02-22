@@ -20,6 +20,7 @@ public:
     
 private:
     vector < vector<T> > vec[9];
+    T *ptr;
 };
 
 
