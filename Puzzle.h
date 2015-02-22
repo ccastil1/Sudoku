@@ -11,7 +11,6 @@
 #include <string>
 #include <cstdlib>
 #include <stdio.h>
-
 using namespace std;
 
 class Puzzle{
