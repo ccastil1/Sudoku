@@ -87,7 +87,6 @@ private:
             cout << endl;
         }
     }
-}
 
 #endif
 
