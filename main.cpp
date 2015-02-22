@@ -7,6 +7,6 @@ using namespace std;
 int main(){
     
     vector <int> intPuzzle;
-//  Puzzle <char> charPuzzle;
+    vector <char> charPuzzle;
     
 }
