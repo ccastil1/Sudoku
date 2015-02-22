@@ -1,10 +1,7 @@
 //
 //  Puzzle.cpp
-//  
-//
 //  Created by Celeste Castillo on 2/21/15.
-//
-//
+
 #include <iostream>
 #include <vector>
 #include <iterator>
