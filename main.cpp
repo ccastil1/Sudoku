@@ -6,14 +6,9 @@
 using namespace std;
 int main(){
     
-    vector <int> intPuzzle(9);
+    vector< vector<int> > PuzzleVec[9];
     
-    cout << "Enter 9 integers: " <<endl;
-    cin >> intPuzzle;
-    cout << intPuzzle;
-    
-    
-    
-    vector <char> charPuzzle;
-    
+    cout << "Enter 9 integers(1-9)": <<endl;
+    cin >> PuzzleVec;
+    cout << PuzzleVec;
 }

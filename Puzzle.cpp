@@ -9,13 +9,38 @@
 using namespace std;
 
 template<typename T>
-Puzzle<T>::Puzzle()
-{
-    ptr = new T[9];
-    vector < vector<T> > vec(9, vector<T>(9));
+Puzzle<T>::Puzzle(){
+    vector< vector<T> > PuzzleVec(9, vector<T>(9));
 }
 
+
 template<typename T>
+Puzzle<T>::Puzzle(const vector <T> &vec[])
+{
+    vector< vector<T> > PuzzleVec(9,vector<T>(9));
+
+    for(int i = 0; i <= 9; i++)
+    {
+        for(vector<T>::iterator I = PuzzleVec[i].begin(); I != PuzzleVec[i]
+            {
+                PuzzleVec[i].push_back(vec[i].pop_front());
+            }
+    }
+
+}
+
+            
+template<typename T>
+Puzzle<T>::~Puzzle()
+{
+    delete [] SudokuVec;
+}
+            
+            
+            
+            
+            
+/*template<typename T>
 Puzzle<T>::Puzzle(const vector<T> &vec)
 {
     ptr = new T[9];
@@ -24,9 +49,4 @@ Puzzle<T>::Puzzle(const vector<T> &vec)
         ptr[i] = vec.ptr;
     }
 }
-
-template<typename T>
-Puzzle<T>::~Puzzle()
-{
-    delete [] ptr;
-}
+*/
