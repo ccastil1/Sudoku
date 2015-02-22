@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
-
+typename std::vector<T>::iterator i;
 using namespace std;
 
 template <typename T>
