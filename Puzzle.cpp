@@ -15,7 +15,7 @@ Puzzle<T>::Puzzle(){
 
 
 template<typename T>
-Puzzle<T>::Puzzle(const vector<T> &vec[])
+Puzzle<T>::Puzzle(const vector<T> &vec)
 {
     vector< vector<T> > PuzzleVec(9,vector<T>(9));
 
