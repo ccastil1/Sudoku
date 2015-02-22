@@ -19,7 +19,7 @@ Puzzle<T>::Puzzle()
 }
 
 template<typename T>
-Puzzle<T>::Puzzle(const Puzzle<T> &vec)
+Puzzle<T>::Puzzle(const vector<T> &vec)
 {
     ptr = new T[9];
     for(int i =0; i < 9; i++)
