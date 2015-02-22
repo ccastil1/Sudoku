@@ -19,8 +19,7 @@ public:
     ~Puzzle();
     
 private:
-    vector < vector<T> > vec[9];
-    T *ptr;
+    vector < vector<T> > SudokuVec[9];
 };
 
 
