@@ -10,5 +10,5 @@ int main(){
     
     cout << "Enter 9 integers(1-9)": <<endl;
     cin >> PuzzleVec;
-    cout << PuzzleVec;
+//    cout << PuzzleVec;
 }
