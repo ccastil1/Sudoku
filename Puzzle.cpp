@@ -19,9 +19,10 @@ Puzzle<T>::Puzzle(const vector<T> &vec)
 {
     vector< vector<T> > PuzzleVec(9,vector<T>(9));
 
+
     for(int i = 0; i <= 9; i++)
     {
-        for(vector<T>::iterator it = PuzzleVec[i].begin(); it != PuzzleVec[i].end(); i++)
+        for(vector<T>::iterator i = PuzzleVec[i].begin(); i != PuzzleVec[i].end(); i++)
             {
                 PuzzleVec[i].push_back(vec[i].pop_front());
             }
