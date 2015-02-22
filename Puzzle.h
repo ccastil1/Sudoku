@@ -32,7 +32,7 @@ private:
     
     
     template<typename T>
-    Puzzle<T>::Puzzle(string file)
+    Puzzle<T>::Puzzle(file)
     {
         size = 9;
         cout << "Enter a file name: ";
