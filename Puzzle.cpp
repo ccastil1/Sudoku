@@ -18,11 +18,12 @@ template<typename T>
 Puzzle<T>::Puzzle(const vector<T> &vec)
 {
     vector< vector<T> > PuzzleVec(9,vector<T>(9));
+    typename std::vector<T>::iterator it;
 
 
     for(int i = 0; i <= 9; i++)
     {
-        for(vector<T>::iterator i = PuzzleVec[i].begin(); i != PuzzleVec[i].end(); i++)
+        for(it = PuzzleVec[i].begin(); it != PuzzleVec[i].end(); it++)
             {
                 PuzzleVec[i].push_back(vec[i].pop_front());
             }
