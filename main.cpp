@@ -23,8 +23,8 @@ int main(int argc, char *argv[]){
         return 1;
     }
     
-    puzzle<int> Sudoku(argv[1]);
+    Puzzle<int> Sudoku(argv[1]);
     
-    Sudoku.print();
+    Sudoku.print_puzzle();
     cout << endl;
 }
