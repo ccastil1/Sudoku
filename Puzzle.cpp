@@ -12,47 +12,6 @@
 #include "Puzzle.h"
 using namespace std;
 
-/*template<typename T>
-Puzzle<T>::Puzzle(){
-    vector< vector<T> > PuzzleVec(9, vector<T>(9));
-}
-
-
-template<typename T>
-Puzzle<T>::Puzzle(const vector<T> &vec)
-{
-    vector< vector<T> > PuzzleVec(9,vector<T>(9));
-    typename std::vector<T>::iterator it;
-
-
-    for(int i = 0; i <= 9; i++)
-    {
-        for(it = PuzzleVec[i].begin(); it != PuzzleVec[i].end(); it++)
-            {
-                PuzzleVec[i].push_back(vec[i].pop_front());
-            }
-    }
-
-}
-
-            
-template<typename T>
-Puzzle<T>::~Puzzle()
-{
-    delete [] SudokuVec;
-}
-            
-template<typename T>
-Puzzle<T>::Puzzle(const vector<T> &vec)
-{
-    ptr = new T[9];
-    for(int i =0; i < 9; i++)
-    {
-        ptr[i] = vec.ptr;
-    }
-}
-*/
-
 
 template<typename T>
 Puzzle<T>::Puzzle(){
