@@ -15,13 +15,13 @@ Puzzle<T>::Puzzle(){
 
 
 template<typename T>
-Puzzle<T>::vector(const vector <T> &vec[])
+Puzzle<T>::Puzzle(const vector<T> &vec[])
 {
     vector< vector<T> > PuzzleVec(9,vector<T>(9));
 
     for(int i = 0; i <= 9; i++)
     {
-        for(vector<T>::iterator I = PuzzleVec[i].begin(); I != PuzzleVec[i]
+        for(vector<T>::iterator I = PuzzleVec[i].begin(); I != PuzzleVec[i].end(); i++)
             {
                 PuzzleVec[i].push_back(vec[i].pop_front());
             }
