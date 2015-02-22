@@ -11,14 +11,14 @@
 #include "Puzzle.h"
 using namespace std;
 
-template<Typename T>
+template<typename T>
 Puzzle<T>::Puzzle()
 {
     ptr = new T[9];
     vector < vector<T> > vec(9, vector<T>(9));
 }
 
-template<Typename T>
+template<typename T>
 Puzzle<T>::Puzzle(const Puzzle<T> &vec)
 {
     ptr = new T[9];
@@ -28,7 +28,7 @@ Puzzle<T>::Puzzle(const Puzzle<T> &vec)
     }
 }
 
-template<Typename T>
+template<typename T>
 Puzzle<T>::~Puzzle()
 {
     delete [] ptr;
