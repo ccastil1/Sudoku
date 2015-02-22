@@ -7,7 +7,6 @@
 #include <iterator>
 #include "Puzzle.h"
 using namespace std;
-typename std::vector<T>::iterator i;
 
 template<typename T>
 Puzzle<T>::Puzzle(){
