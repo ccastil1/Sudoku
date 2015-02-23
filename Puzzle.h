@@ -54,7 +54,7 @@ Puzzle<T>::Puzzle(string file){
     ifstream filename;
     filename.open(file.c_str());
     
-  /*  int buffer;
+    int buffer;
     for(int i=0; i<size; i++)
     {
         for(int j=0; j<size; j++)
@@ -84,19 +84,6 @@ Puzzle<T>::Puzzle(string file){
             }
             
         }
-    }*/
-    
-    
-    vector<T> tempVec;
-    while(!Sudoku.eof())
-    {
-        for(i=0; i < size; i++)
-        {
-            Sudoku >> tempVar;
-            tempVec.push_back(tempVar);
-        }
-        puzzle.push_back(tempVec);
-        tempVec.clear();
     }
 }
 
