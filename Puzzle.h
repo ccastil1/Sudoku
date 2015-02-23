@@ -11,6 +11,7 @@
 #include <string>
 #include <cstdlib>
 #include <stdio.h>
+#include <math.h>
 
 using namespace std;
 
@@ -26,6 +27,10 @@ public:
     Puzzle();   //declare default constructor
     Puzzle(string);   //declare non default constructor
     void print_puzzle();    //declare member function to print the puzzle
+    void boardPlacement();
+    void checkPlacement(int, int);
+    //    void playAgain();
+    
 private:
     int size; //declare size variable for board size
     twoDvector SudokuBoardVec; //2D board vector
@@ -96,4 +101,77 @@ void Puzzle<T>::print_puzzle()
     }
 }
 
+template<typename T>
+void Puzzle<T>::checkPlacement(int xcoord, int ycoord)
+{
+    int x = xcoord;
+    int y = ycoord;
+    
+    if(SudokuBoardVec[xcoord][ycoord] != 0)
+    {
+        for(int i=0; i < size; i++)
+        {
+            FillBoard[x][y][i] = 0;
+        }
+    }
+    
+    for(x=0; x < size; x++)
+    {
+        for(int z=0; z < size; z++)
+        {
+            if(SudokuBoardVec[x][ycoord] == FillBoard[xcoord][ycoord][z])
+            {
+                FillBoard[xcoord][ycoord][z] = 0;
+            }
+        }
+    }
+    
+    for(y=0; y < size; y++)
+    {
+        for(int z=0; z < size; z++)
+        {
+            if(SudokuBoardVec[x][ycoord] == FillBoard[xcoord][ycoord][z])
+            {
+                FillBoard[xcoord][ycoord][z] = 0;
+            }
+        }
+    }
+    
+    x = xcoord;
+    y = ycoord;
+    int sqrSize = sqrt(size);
+    int rSqr = xcoord/sqrSize;
+    int cSqr = ycoord/sqrSize;
+    
+    for(int i=sqrSize*rSqr; i < sqrSize*rSqr + sqrSize; i++)
+    {
+        for(int j=sqrSize*cSqr; j < sqrSize*cSqr + sqrSize; j++)
+        {
+            for (int z=0; z < size; z++)
+            {
+                if(SudokuBoardVec[i][j] == FillBoard[xcoord][ycoord][z])
+                {
+                    FillBoard[xcoord][ycoord][z] = 0;
+                }
+            }
+        }
+    }
+}
 
+template<typename T>
+void Puzzle<T>::boardPlacement()
+{
+    int xcoord;
+    int ycoord;
+    int num;
+    
+    cout << "Enter an x position: " <<endl;
+    cin >> xcoord;
+    cout << "Enter a y position: " <<endl;
+    cin >> ycoord;
+    cout << "Enter a number(1-9): " <<endl;
+    cin >> num;
+    cout << endl;
+    
+    checkPlacement(xcoord,ycoord);
+}
