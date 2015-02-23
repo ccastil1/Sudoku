@@ -52,7 +52,7 @@ Puzzle<T>::Puzzle(string file){
     cin >> file;
     
     ifstream filename;
-    filename.open(file.c_str());
+    filename.open("puzzle.txt");
     
     int buffer;
     for(int i=0; i<size; i++)
