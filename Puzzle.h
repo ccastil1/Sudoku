@@ -88,7 +88,7 @@ void Puzzle<T>::numPlacement()
     cout << endl;
     
     checkPlacement(xcoord, ycoord);
-    if(SudokuBoardVec[xcoord][ycoor] != 0)
+    if(SudokuBoardVec[xcoord][ycoord] != 0)
     {
         cout << "Error! Spot already has a number! Try again.\n" <<endl;
         numPlacement();
