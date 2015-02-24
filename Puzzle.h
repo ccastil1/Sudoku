@@ -1,17 +1,10 @@
-//  Puzzle.h
-
-//  Created by Celeste Castillo on 2/21/15.
-#ifndef _Puzzle_h
-#define _Puzzle_h
-
 #include <iostream>
 #include <vector>
-#include <iterator>
-#include <fstream>
 #include <string>
+#include <fstream>
 #include <cstdlib>
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -19,87 +12,106 @@ typedef vector<int> oneVector;
 typedef vector<oneVector> twoDvector;
 typedef vector<vector<oneVector> > threeDvector;
 
-
 template<typename T>
-class Puzzle
-{
+class Puzzle{
 public:
-    Puzzle();   //declare default constructor
-    Puzzle(string);   //declare non default constructor
-    void print_puzzle();    //declare member function to print the puzzle
-    void boardPlacement();
+    Puzzle();
+    Puzzle(string);
+    void display();
+    void numPlacement();
     void checkPlacement(int, int);
-    //    void playAgain();
+    void continuePlay();
     
 private:
-    int size; //declare size variable for board size
-    twoDvector SudokuBoardVec; //2D board vector
-    threeDvector FillBoard; //3D vector to place numbers in board
+    int size;
+    twoDvector SudokuBoardVec;
+    threeDvector fillBoard;
 };
-#endif
 
 template<typename T>
-Puzzle<T>::Puzzle()
+Puzzle<T>::Puzzle(string filename)
 {
-    
-}   //default constructor
-
-
-template<typename T>
-Puzzle<T>::Puzzle(string file){
     size = 9;
-    cout << "Enter a file name: ";
-    cin >> file;
     
-    ifstream filename;
-    filename.open("puzzle.txt");
+    ifstream infile;
+    infile.open(filename.c_str());
+    
+    SudokuBoardVec.resize(size);
+    fillBoard.resize(size);
     
     int buffer;
     for(int i=0; i<size; i++)
     {
         for(int j=0; j<size; j++)
         {
-            if(!(filename >> buffer))
+            if(!(infile >> buffer))
             {
-                cout << "Error! Invalid File!"<< endl;
+                cout << "Error! Invalid file!"<<endl;
                 exit(1);
             }
             
-            if (buffer == 0 || (buffer > 0 && buffer <= 9))
+            if(buffer == 0 || (buffer>0 && buffer<=size))
             {
                 SudokuBoardVec[i].push_back(buffer);
             }
         }
     }
     
-    for (int i=0; i < size; i++)
+    for(int i=0; i<size; i++)
     {
-        FillBoard.push_back(vector<oneVector>());
+        fillBoard.push_back(vector<oneVector>());
         for(int j=0; j<size; j++)
         {
-            FillBoard[i].push_back(oneVector());
-            for(int k=1; k < size; k++)
+            fillBoard[i].push_back(oneVector());
+            for(int k=1; k<size; k++)
             {
-                FillBoard[i][j].push_back(k);
+                fillBoard[i][j].push_back(k);
             }
-            
         }
     }
+    
 }
 
 template<typename T>
-void Puzzle<T>::print_puzzle()
+void Puzzle<T>::numPlacement()
 {
-    for(int i=0; i < size; i++)
+    int xcoord;
+    int ycoord;
+    int num;
+    
+    cout << "Enter an x position: " <<endl;
+    cin >> ycoord;
+    cout << "Enter a y position: " <<endl;
+    cin >> xcoord;
+    cout << "Enter a number(1-9): " <<endl;
+    cin >> num;
+    cout << endl;
+    
+    checkPlacement(xcoord, ycoord);
+    
+    SudokuBoardVec[xcoord][ycoord] = num;
+    display();
+    continuePlay();
+    
+    
+}
+
+template<typename T>
+void Puzzle<T>::display()
+{
+    typename twoDvector::iterator i;
+    typename oneVector::iterator j;
+    
+    for(i=SudokuBoardVec.begin(); i !=SudokuBoardVec.end(); i++)
     {
-        for(int j=0; j < size; j++)
+        for(j=(*i).begin(); j != (*i).end(); j++)
         {
-            cout << SudokuBoardVec[i][j] << " ";
+            cout << (*j);
         }
-        
-        cout << endl;
+        cout <<endl;
     }
 }
+
 
 template<typename T>
 void Puzzle<T>::checkPlacement(int xcoord, int ycoord)
@@ -109,49 +121,50 @@ void Puzzle<T>::checkPlacement(int xcoord, int ycoord)
     
     if(SudokuBoardVec[xcoord][ycoord] != 0)
     {
-        for(int i=0; i < size; i++)
+        for(int z=0; z<size; z++)
         {
-            FillBoard[x][y][i] = 0;
+            fillBoard[xcoord][ycoord][z] = 0;
         }
     }
     
-    for(x=0; x < size; x++)
+    for(x=0; x<size; x++)
     {
-        for(int z=0; z < size; z++)
+        for(int z=0; z<size; z++)
         {
-            if(SudokuBoardVec[x][ycoord] == FillBoard[xcoord][ycoord][z])
+            if(SudokuBoardVec[x][ycoord] == fillBoard[xcoord][ycoord][z])
             {
-                FillBoard[xcoord][ycoord][z] = 0;
+                fillBoard[xcoord][ycoord][z] = 0;
             }
         }
     }
     
-    for(y=0; y < size; y++)
+    for(y=0; y<size; y++)
     {
-        for(int z=0; z < size; z++)
+        for(int z=0; z<size; z++)
         {
-            if(SudokuBoardVec[x][ycoord] == FillBoard[xcoord][ycoord][z])
+            if(SudokuBoardVec[xcoord][y] == fillBoard[xcoord][ycoord][z])
             {
-                FillBoard[xcoord][ycoord][z] = 0;
+                fillBoard[xcoord][ycoord][z] = 0;
             }
         }
     }
     
     x = xcoord;
     y = ycoord;
-    int sqrSize = sqrt(size);
-    int rSqr = xcoord/sqrSize;
-    int cSqr = ycoord/sqrSize;
     
-    for(int i=sqrSize*rSqr; i < sqrSize*rSqr + sqrSize; i++)
+    int squareSize = sqrt(size);
+    int rSquare = xcoord/squareSize;
+    int cSquare = ycoord/squareSize;
+    
+    for(int i=squareSize*rSquare; i<squareSize*rSquare + squareSize; i++)
     {
-        for(int j=sqrSize*cSqr; j < sqrSize*cSqr + sqrSize; j++)
+        for(int j=squareSize*cSquare; j<squareSize*cSquare + squareSize; j++)
         {
-            for (int z=0; z < size; z++)
+            for(int z=0; z<size; z++)
             {
-                if(SudokuBoardVec[i][j] == FillBoard[xcoord][ycoord][z])
+                if(SudokuBoardVec[i][j] == fillBoard[xcoord][ycoord][z])
                 {
-                    FillBoard[xcoord][ycoord][z] = 0;
+                    fillBoard[xcoord][ycoord][z] = 0;
                 }
             }
         }
@@ -159,19 +172,19 @@ void Puzzle<T>::checkPlacement(int xcoord, int ycoord)
 }
 
 template<typename T>
-void Puzzle<T>::boardPlacement()
-{
-    int xcoord;
-    int ycoord;
-    int num;
+void Puzzle<T>::continuePlay(){
     
-    cout << "Enter an x position: " <<endl;
-    cin >> xcoord;
-    cout << "Enter a y position: " <<endl;
-    cin >> ycoord;
-    cout << "Enter a number(1-9): " <<endl;
-    cin >> num;
-    cout << endl;
+    string playAgain;
+    cout << "Continue Playing? ";
+    cin >> playAgain;
     
-    checkPlacement(xcoord,ycoord);
+    if(playAgain == "yes")
+    {
+        numPlacement();
+    }
+    else
+    {
+        exit(1);
+    }
+    
 }
