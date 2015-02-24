@@ -75,29 +75,6 @@ Puzzle<T>::Puzzle(string filename)
     
 }
 
-/*template<typename T>
- void Puzzle<T>::printPuzzleBoard()
- {
- for(int i=0; i<size; i++)
- {
- for(int j=0; j<size; j++)
- {
- if(SudokuBoardVecVec[i][j] == 0)
- {
- cout << " ";
- }
- 
- else
- {
- cout << SudokuBoardVecVec[i][j] << " ";
- }
- }
- 
- cout << endl;
- }
- 
- } */
-
 template<typename T>
 void Puzzle<T>::display()
 {
