@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 typedef vector<int> oneVector;
 typedef vector<oneVector> twoDvector;
 typedef vector<vector<oneVector> > threeDvector;
@@ -17,15 +18,17 @@ class Puzzle{
 public:
     Puzzle();
     Puzzle(string);
+    void printPuzzleBoard();
     void display();
     void numPlacement();
-    void checkPlacement(int, int);
-    void continuePlay();
+    int checkPlacement(int, int, int);
+    void error();
+    void finished();
     
 private:
     int size;
     twoDvector SudokuBoardVec;
-    threeDvector fillBoard;
+    threeDvector checkBoard;
 };
 
 template<typename T>
@@ -37,7 +40,7 @@ Puzzle<T>::Puzzle(string filename)
     infile.open(filename.c_str());
     
     SudokuBoardVec.resize(size);
-    fillBoard.resize(size);
+    checkBoard.resize(size);
     
     int buffer;
     for(int i=0; i<size; i++)
@@ -59,48 +62,41 @@ Puzzle<T>::Puzzle(string filename)
     
     for(int i=0; i<size; i++)
     {
-        fillBoard.push_back(vector<oneVector>());
+        checkBoard.push_back(vector<oneVector>());
         for(int j=0; j<size; j++)
         {
-            fillBoard[i].push_back(oneVector());
+            checkBoard[i].push_back(oneVector());
             for(int k=1; k<size; k++)
             {
-                fillBoard[i][j].push_back(k);
+                checkBoard[i][j].push_back(k);
             }
         }
     }
     
 }
 
-template<typename T>
-void Puzzle<T>::numPlacement()
-{
-    int xcoord;
-    int ycoord;
-    int num;
-    
-    cout << "Enter an x position: " <<endl;
-    cin >> ycoord;
-    cout << "Enter a y position: " <<endl;
-    cin >> xcoord;
-    cout << "Enter a number(1-9): " <<endl;
-    cin >> num;
-    cout << endl;
-    
-    checkPlacement(xcoord, ycoord);
-    if(SudokuBoardVec[xcoord][ycoord] != 0)
-    {
-        cout << "Error! Spot already has a number! Try again.\n" <<endl;
-        numPlacement();
-    }
-    else
-    {
-        SudokuBoardVec[xcoord][ycoord] = num;
-        display();
-        continuePlay();
-    }
-    
-}
+/*template<typename T>
+ void Puzzle<T>::printPuzzleBoard()
+ {
+ for(int i=0; i<size; i++)
+ {
+ for(int j=0; j<size; j++)
+ {
+ if(SudokuBoardVecVec[i][j] == 0)
+ {
+ cout << " ";
+ }
+ 
+ else
+ {
+ cout << SudokuBoardVecVec[i][j] << " ";
+ }
+ }
+ 
+ cout << endl;
+ }
+ 
+ } */
 
 template<typename T>
 void Puzzle<T>::display()
@@ -120,77 +116,95 @@ void Puzzle<T>::display()
 
 
 template<typename T>
-void Puzzle<T>::checkPlacement(int xcoord, int ycoord)
+void Puzzle<T>::numPlacement()
 {
-    int x = xcoord;
-    int y = ycoord;
+    int xcoord;
+    int ycoord;
+    int num;
+    
+    cout << "Enter an x position: " <<endl;
+    cin >> ycoord;
+    cout << "Enter a y position: " <<endl;
+    cin >> xcoord;
+    cout << "Enter a number(1-9): " <<endl;
+    cin >> num;
+    cout << endl;
     
     if(SudokuBoardVec[xcoord][ycoord] != 0)
     {
-        for(int z=0; z<size; z++)
-        {
-            fillBoard[xcoord][ycoord][z] = 0;
-        }
+        cout << "Error! Spot already has a number! Try again.\n" <<endl;
+        display();
+        numPlacement();
     }
     
-    for(x=0; x<size; x++)
+    if(checkPlacement(xcoord, ycoord, num))
     {
-        for(int z=0; z<size; z++)
-        {
-            if(SudokuBoardVec[x][ycoord] == fillBoard[xcoord][ycoord][z])
-            {
-                fillBoard[xcoord][ycoord][z] = 0;
-            }
-        }
-    }
-    
-    for(y=0; y<size; y++)
-    {
-        for(int z=0; z<size; z++)
-        {
-            if(SudokuBoardVec[xcoord][y] == fillBoard[xcoord][ycoord][z])
-            {
-                fillBoard[xcoord][ycoord][z] = 0;
-            }
-        }
-    }
-    
-    x = xcoord;
-    y = ycoord;
-    
-    int squareSize = sqrt(size);
-    int rSquare = xcoord/squareSize;
-    int cSquare = ycoord/squareSize;
-    
-    for(int i=squareSize*rSquare; i<squareSize*rSquare + squareSize; i++)
-    {
-        for(int j=squareSize*cSquare; j<squareSize*cSquare + squareSize; j++)
-        {
-            for(int z=0; z<size; z++)
-            {
-                if(SudokuBoardVec[i][j] == fillBoard[xcoord][ycoord][z])
-                {
-                    fillBoard[xcoord][ycoord][z] = 0;
-                }
-            }
-        }
+        SudokuBoardVec[xcoord][ycoord] == num;
+        display();
+        numPlacement();
     }
 }
 
+
 template<typename T>
-void Puzzle<T>::continuePlay(){
-    
-    string playAgain;
-    cout << "Continue Playing? ";
-    cin >> playAgain;
-    
-    if(playAgain == "yes")
+int Puzzle<T>::checkPlacement(int xcoord, int ycoord, int num)
+{
+    size = 9;
+    for(int i=0; i<size; i++)
     {
-        numPlacement();
-    }
-    else
-    {
-        exit(1);
+        if(num == SudokuBoardVec[xcoord][i] && xcoord!=i)
+        {
+            error();
+            return 0;
+        }
+        
+        if(num == SudokuBoardVec[i][ycoord] && ycoord!=i)
+        {
+            error();
+            return 0;
+        }
+        
     }
     
+    for(int j=xcoord; j<(xcoord+3); j++)
+    {
+        for(int k=ycoord; k<(ycoord+3); k++)
+        {
+            if(num == SudokuBoardVec[j][k] && xcoord !=j && ycoord !=k)
+            {
+                error();
+                return 0;
+            }
+        }
+    }
+    
+    return 1;
+    
+}
+
+template<typename T>
+void Puzzle<T>::error()
+{
+    cout << "Error! Number already used in puzzle!" <<endl;
+    numPlacement();
+}
+
+template<typename T>
+void Puzzle<T>::finished()
+{
+    int done = 0;
+    for(int i=0; i<size; i++)
+    {
+        for(int j=0; j<size; j++)
+        {
+            if(SudokuBoardVec[i][j] == 0)
+            {
+                done = 1;
+            }
+        }
+    }
+    if(done = 1)
+    {
+        cout<<"Board full!"<<endl;
+    }
 }
