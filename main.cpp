@@ -12,10 +12,10 @@ using namespace std;
 int main()
 {
     Puzzle<int> Sudoku("puzzle.txt");
-    Puzzle<char> charSudoku("wordoky.txt");
+ //   Puzzle<char> charSudoku("wordoky.txt");
 
     Sudoku.display();
     Sudoku.numPlacement();
-    charSudoku.display();
-    charSudoku.numPlacement();
+  //  charSudoku.display();
+  //  charSudoku.numPlacement();
 }
